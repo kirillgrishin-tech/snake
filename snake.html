@@ -46,6 +46,7 @@
             let body = this.body
             let head = this.body[this.length-1];
             let headCell = head.map(function(value, index){ return value + direction[direct][index] });
+            swipefc();
             compareEatOrGameOver(headCell, body);
             return headCell;
         }
@@ -146,38 +147,7 @@
                 return;
         }
     }
-
-    function dirx(id){
-        switch (id) {
-            case "left":
-                if (direct != 0){
-                    directx = 2;
-                }
-                break;
-
-            case "right":
-                if (direct != 2){
-                    directx = 0;
-                }
-                break;
-
-            case "up":
-                if (direct != 1){
-                    directx = 3;
-                }
-                break;
-
-            case "down":
-                if (direct != 3){
-                    directx = 1;
-                }
-                break;
-
-            default :
-                return;
-        }
-    }
-
+function swipefc(){
 	let     swipedir,
 			startX,
 			startY,
@@ -206,22 +176,56 @@
 
 	window.addEventListener('touchend', function(e){
 		let touchobj = e.changedTouches[0]
-		distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
-		distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
-		elapsedTime = new Date().getTime() - startTime // get time elapsed
-		if (elapsedTime <= allowedTime){ // first condition for awipe met
-			if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+		distX = touchobj.pageX - startX 
+		distY = touchobj.pageY - startY 
+		elapsedTime = new Date().getTime() - startTime 
+		if (elapsedTime <= allowedTime){ 
+			if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ 
 				swipedir = (distX < 0)? 'left' : 'right'
 			}
-			else if (Math.abs(distY) >= threshold  && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+			else if (Math.abs(distY) >= threshold  && Math.abs(distX) <= restraint){ 
 				swipedir = (distY < 0)? 'up' : 'down'
 			}
 		}
-		// check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
 		handleswipe(swipedir)
 		e.preventDefault()
 	}, false)
-    
+}
+
+function remswipe(){
+    window.removeEventListener('touchstart', function(e){
+		let touchobj = e.changedTouches[0]
+		swipedir = 'none'
+		dist = 0
+		startX = touchobj.pageX
+		startY = touchobj.pageY
+		startTime = new Date().getTime() // record time when finger first makes contact with surface
+		e.preventDefault()
+	
+	})
+
+	window.removeEventListener('touchmove', function(e){
+		e.preventDefault() // prevent scrolling when inside DIV
+	})
+
+	window.removeEventListener('touchend', function(e){
+		let touchobj = e.changedTouches[0]
+		distX = touchobj.pageX - startX 
+		distY = touchobj.pageY - startY 
+		elapsedTime = new Date().getTime() - startTime 
+		if (elapsedTime <= allowedTime){ 
+			if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ 
+				swipedir = (distX < 0)? 'left' : 'right'
+			}
+			else if (Math.abs(distY) >= threshold  && Math.abs(distX) <= restraint){ 
+				swipedir = (distY < 0)? 'up' : 'down'
+			}
+		}
+		handleswipe(swipedir)
+		e.preventDefault()
+	})
+}
+
     let hidetimer = null
     
         function handleswipe(swipe){
@@ -284,6 +288,7 @@
                 if (tmp.className == 'cell snake'){
                     clearInterval(timer);
                     alert('Вы проиграли! Ваш счет: ' + (snake.length-3) + '. Нажмите кнопку «Обновить» для начала новой игры!');
+                    remswipe();
                 }
             }
         }
