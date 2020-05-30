@@ -12,83 +12,6 @@
 </div>
 <div class = score>Ваш счет: 0</div>
 <script type="text/javascript">
-  
-  window.addEventListener('load', function(){
-    
-      let touchsurface = document.getElementById('ALL'),
-          startX,
-          startY,
-          distX,
-          distY,
-          swipedir,
-          threshold = 150, // минимальное расстояние для swipe
-          allowedTime = 200, // максимальное время прохождения установленного расстояния
-          elapsedTime,
-          startTime
-    
-      touchsurface.addEventListener('touchstart', function(e){
-          touchsurface.innerHTML = ''
-          let touchobj = e.changedTouches[0]
-          let dist = 0
-          startX = touchobj.pageX
-          startY = touchobj.pageY
-          startTime = new Date().getTime() // время контакта с поверхностью сенсора
-          e.preventDefault()
-      }, false)
-    
-      touchsurface.addEventListener('touchmove', function(e){
-          e.preventDefault() // отключаем стандартную реакцию скроллинга
-      }, false)
-    
-      touchsurface.addEventListener('touchend', function(e){
-          let touchobj = e.changedTouches[0]
-          distX = touchobj.pageX - startX // получаем пройденную дистанцию
-          distY = touchobj.pageY - startY
-          elapsedTime = new Date().getTime() - startTime // узнаем пройденное время
-          // проверяем затраченное время,горизонтальное перемещение >= threshold, и вертикальное перемещение <= 100
-          if (elapsedTime <= allowedTime){
-            if (Math.abs(distX) >= threshold && Math.abs(distY) <= 100){
-						swipedir = (distX < 0)? 'left' : 'right'
-					}
-					else if (Math.abs(distY) >= threshold  && Math.abs(distX) <= 100){
-						swipedir = (distY < 0)? 'up' : 'down'
-					}
-          }
-          handleswipe(swipedir)
-          e.preventDefault()
-      }, false)
-    
-  }, false)
-
-  function handleswipe(swipe){
-        switch (swipe){
-            case 'left':
-                if (direct != 0){
-                    directx = 2;
-                }
-                break;
-
-            case 'right':
-                if (direct != 2){
-                    directx = 0;
-                }
-                break;
-
-            case 'up':
-                if (direct != 1){
-                    directx = 3;
-                }
-                break;
-
-            case 'down':
-                if (direct != 3){
-                    directx = 1;
-                }
-                break;
-        }
-
-      }
-
     snmv = false;
     let brd = document.getElementsByClassName("border");
     let timer;
@@ -223,6 +146,7 @@
                 return;
         }
     }
+
     function dirx(id){
         switch (id) {
             case "left":
@@ -253,6 +177,78 @@
                 return;
         }
     }
+  window.addEventListener('load', function(){
+      let startX,
+          startY,
+          distX,
+          distY,
+          swipedir,
+          threshold = 150, // минимальное расстояние для swipe
+          allowedTime = 200, // максимальное время прохождения установленного расстояния
+          elapsedTime,
+          startTime
+    
+      window.addEventListener('touchstart', function(e){
+          window.innerHTML = ''
+          let touchobj = e.changedTouches[0]
+          let dist = 0
+          startX = touchobj.pageX
+          startY = touchobj.pageY
+          startTime = new Date().getTime() // время контакта с поверхностью сенсора
+          e.preventDefault()
+      }, false)
+    /*
+      window.addEventListener('touchmove', function(e){
+          e.preventDefault() // отключаем стандартную реакцию скроллинга
+      }, false)
+    */
+      window.addEventListener('touchend', function(e){
+          let touchobj = e.changedTouches[0]
+          distX = touchobj.pageX - startX // получаем пройденную дистанцию
+          distY = touchobj.pageY - startY
+          elapsedTime = new Date().getTime() - startTime // узнаем пройденное время
+          // проверяем затраченное время,горизонтальное перемещение >= threshold, и вертикальное перемещение <= 100
+          if (elapsedTime <= allowedTime){
+            if (Math.abs(distX) >= threshold && Math.abs(distY) <= 100){
+						swipedir = (distX < 0)? 'left' : 'right'
+					}
+					else if (Math.abs(distY) >= threshold  && Math.abs(distX) <= 100){
+						swipedir = (distY < 0)? 'up' : 'down'
+					}
+          }
+          handleswipe(swipedir)
+          e.preventDefault()
+      }, false)
+    
+      function handleswipe(swipe){
+        switch (swipe){
+            case 'left':
+                if (direct != 0){
+                    directx = 2;
+                }
+                break;
+
+            case 'right':
+                if (direct != 2){
+                    directx = 0;
+                }
+                break;
+
+            case 'up':
+                if (direct != 1){
+                    directx = 3;
+                }
+                break;
+
+            case 'down':
+                if (direct != 3){
+                    directx = 1;
+                }
+                break;
+        }
+
+      }
+  }, false)
 
     function compareEatOrGameOver (headCell, body) {
         let tmp = document.getElementById(headCell.join());
