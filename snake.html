@@ -105,6 +105,7 @@
         </div>
         <div class = score>Ваш счет: 0</div>
     <script type="text/javascript">
+        alert("Присутствует поддержка свайпов со смартфона!")
         snmv = false;
         let brd = document.getElementsByClassName("border"),
             now = new Date()
@@ -151,7 +152,6 @@
     
         window.addEventListener('keydown', keyHandler, false);
         setTimeout(prepareGamePane,500,fieldSizeX,fieldSizeY);
-        alert("Присутствует поддержка свайпов со смартфона!")
     
         function prepareGamePane (fieldSizeX, fieldSizeY){
             let rt = 12;
