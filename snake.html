@@ -3,8 +3,20 @@
     <title>Змейка. </title>
 </head>
 <body>
-<script>
-    document.addEventListener('DOMContentLoaded',function(){
+    <link rel="stylesheet" href="style.css">
+    <div id = "ALL" class="border"></div>
+    <div class="buttons">
+        <button id="easy" onclick="start(1)">Простой</button>
+        <button id="medium" onclick="start(2)">Средний</button>
+        <button id="hard" onclick="start(3)">Сложный</button>
+        <button id="reload" onclick="start(4)">Обновить</button>
+    </div>
+    <div class = score>Ваш счет: 0</div>
+<script type="text/javascript">
+    window.addEventListener("load",start,false);
+
+    function start(num){
+        if (typeof(num) != "number"){
         snmv = false;
         let brd = document.getElementsByClassName("border");
         let timer;
@@ -18,352 +30,11 @@
             'down' : 40
         };
 
-<<<<<<< HEAD
         let direction = [
             [0,1],
             [1,0],
             [0,-1],
             [-1,0]];
-=======
-    let snake = {
-        length : 3,
-        body : [[1,1],[1,2],[1,3]],
-        initialisationSnake : function (){
-            for ( let i = 0; i < this.length; i++){
-                let currentBodyPart = this.body[i];
-                document.getElementById(currentBodyPart.join()).className = 'cell snake';
-            }
-        },
-        move : function (){
-            direct = directx;
-            snmv = true;
-            let body = this.body
-            let head = this.body[this.length-1];
-            let headCell = head.map(function(value, index){ return value + direction[direct][index] });
-            compareEatOrGameOver(headCell, body);
-            return headCell;
-        }
-    };
-
-    window.addEventListener('keydown', keyHandler, false);
-    prepareGamePane(fieldSizeX, fieldSizeY);
->>>>>>> parent of a222951... Я разобрался с этим говном
-
-            function prepareGamePane (fieldSizeX, fieldSizeY){
-        let rt = 12;
-        for ( let x = 0; x < fieldSizeX; x++){
-            let coordinateX = document.createElement('div');
-            document.body.appendChild(coordinateX);
-            coordinateX.className = 'field';
-            coordinateX.style = "top: "+(rt+x*5)+"%";
-            for (let y = 0; y < fieldSizeY; y++){
-                let coordinateY = document.createElement('div');
-                coordinateX.appendChild(coordinateY);
-                coordinateY.className = 'cell';
-                coordinateY.id = x+','+y;
-                coordinateY.style = "width: "+coordinateY.clientHeight;
-            }
-        }
-        setInterval(function(){
-            let ys = document.getElementsByClassName("cell");
-            for(let y=0; y<ys.length; y++){
-                ys[y].style = "width: "+ys[y].clientHeight}
-        },50);
-        snake.initialisationSnake();
-        makeFood(fieldSizeX, fieldSizeY);
-    }
-
-    function makeFood (fieldSizeX, fieldSizeY){
-        let x = Math.round(Math.random() * (fieldSizeX-1));
-        let y = Math.round(Math.random() * (fieldSizeY-1));
-        let food = document.getElementById(x+','+y);
-        if (food.className == 'cell'){
-            food.className = "cell food";
-        } else { 
-            makeFood(fieldSizeX, fieldSizeY);
-        }
-        return food;
-    }
-
-
-    function keyHandler (event){
-        switch (event.keyCode) {
-            case KEY.left:
-                if (direct != 0){
-                    directx = 2;
-                }
-                break;
-
-            case 65:
-                if (direct != 0){
-                    directx = 2;
-                }
-                break;
-
-            case KEY.right:
-                if (direct != 2){
-                    directx = 0;
-                }
-                break;
-            
-            case 68:
-                if (direct != 2){
-                    directx = 0;
-                }
-                break;
-
-            case KEY.up:
-                if (direct != 1){
-                    directx = 3;
-                }
-                break;
-
-            case 87:
-                if (direct != 1){
-                    directx = 3;
-                }
-                break;
-
-            case KEY.down:
-                if (direct != 3){
-                    directx = 1;
-                }
-                break;
-
-            case 83:
-                if (direct != 3){
-                    directx = 1;
-                }
-                break;
-
-            default :
-                return;
-        }
-    }
-<<<<<<< HEAD
-<<<<<<< HEAD
-function swipefc(){
-    let     swipedir,
-            startX,
-            startY,
-            distX,
-            distY,
-            threshold = 80,
-            restraint = 100,
-            allowedTime = 5000,
-            elapsedTime,
-            startTime
-
-    window.addEventListener('touchstart', function(e){
-        let touchobj = e.changedTouches[0]
-        swipedir = 'none'
-        dist = 0
-        startX = touchobj.pageX
-        startY = touchobj.pageY
-        startTime = new Date().getTime() // record time when finger first makes contact with surface
-        e.preventDefault()
-    
-    }, false)
-
-    window.addEventListener('touchmove', function(e){
-        e.preventDefault() // prevent scrolling when inside DIV
-    }, false)
-
-    window.addEventListener('touchend', function(e){
-        let touchobj = e.changedTouches[0]
-        distX = touchobj.pageX - startX 
-        distY = touchobj.pageY - startY 
-        elapsedTime = new Date().getTime() - startTime 
-        if (elapsedTime <= allowedTime){ 
-            if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ 
-                swipedir = (distX < 0)? 'left' : 'right'
-            }
-            else if (Math.abs(distY) >= threshold  && Math.abs(distX) <= restraint){ 
-                swipedir = (distY < 0)? 'up' : 'down'
-            }
-        }
-        handleswipe(swipedir)
-        e.preventDefault()
-    }, false)
-}
-=======
-=======
->>>>>>> parent of a222951... Я разобрался с этим говном
-
-    function dirx(id){
-        switch (id) {
-            case "left":
-                if (direct != 0){
-                    directx = 2;
-                }
-                break;
-
-            case "right":
-                if (direct != 2){
-                    directx = 0;
-                }
-                break;
-
-            case "up":
-                if (direct != 1){
-                    directx = 3;
-                }
-                break;
-
-            case "down":
-                if (direct != 3){
-                    directx = 1;
-                }
-                break;
-
-            default :
-                return;
-        }
-    }
-
-	let     swipedir,
-			startX,
-			startY,
-			distX,
-			distY,
-			threshold = 80,
-			restraint = 100,
-			allowedTime = 5000,
-			elapsedTime,
-			startTime
-
-	window.addEventListener('touchstart', function(e){
-		let touchobj = e.changedTouches[0]
-		swipedir = 'none'
-		dist = 0
-		startX = touchobj.pageX
-		startY = touchobj.pageY
-		startTime = new Date().getTime() // record time when finger first makes contact with surface
-		e.preventDefault()
-	
-	}, false)
-
-	window.addEventListener('touchmove', function(e){
-		e.preventDefault() // prevent scrolling when inside DIV
-	}, false)
-
-	window.addEventListener('touchend', function(e){
-		let touchobj = e.changedTouches[0]
-		distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
-		distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
-		elapsedTime = new Date().getTime() - startTime // get time elapsed
-		if (elapsedTime <= allowedTime){ // first condition for awipe met
-			if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
-				swipedir = (distX < 0)? 'left' : 'right'
-			}
-			else if (Math.abs(distY) >= threshold  && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-				swipedir = (distY < 0)? 'up' : 'down'
-			}
-		}
-		// check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
-		handleswipe(swipedir)
-		e.preventDefault()
-	}, false)
-    
-    let hidetimer = null
->>>>>>> parent of a222951... Я разобрался с этим говном
-    
-        function handleswipe(swipe){
-            switch (swipe){
-                case 'left':
-                    if (direct != 0){
-                        directx = 2;
-                    }
-                    break;
-
-                case 'right':
-                    if (direct != 2){
-                        directx = 0;
-                    }
-                    break;
-
-                case 'up':
-                    if (direct != 1){
-                        directx = 3;
-                    }
-                    break;
-
-                case 'down':
-                    if (direct != 3){
-                        directx = 1;
-                    }
-                    break;
-            }
-        }
-            
-
-    function compareEatOrGameOver (headCell, body) {
-        let tmp = document.getElementById(headCell.join());
-        if (tmp == null ) {
-        if (headCell[0] == -1)
-            headCell[0] = fieldSizeX - 1;
-        if (headCell[0] == fieldSizeX)
-            headCell[0] = 0;
-        if (headCell[1] == -1)
-            headCell[1] = fieldSizeY - 1;
-        if (headCell[1] == fieldSizeY)
-            headCell[1] = 0;
-        tmp = document.getElementById(headCell.join());
-        }
-
-        if ( tmp != null && tmp.className == 'cell' ){
-            let removeTail = body.shift();
-            body.push(headCell);
-            document.getElementById(removeTail.join()).className = 'cell';
-            document.getElementById(headCell.join()).className = 'cell snake';
-        } else { 
-            if ( tmp != null && tmp.className == 'cell food'){
-                snake.length++;
-                let scor = document.querySelector('.score');
-                scor.innerHTML = 'Ваш счет: '+ (snake.length-3);
-                body.push(headCell);
-                document.getElementById(headCell.join()).className = 'cell snake';
-                makeFood(fieldSizeX, fieldSizeY);
-            } else { 
-                if (tmp.className == 'cell snake'){
-                    clearInterval(timer);
-                    alert('Вы проиграли! Ваш счет: ' + (snake.length-3) + '. Нажмите кнопку «Обновить» для начала новой игры!');
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    document.getElementById("reload").addEventListener('touchstart',reload,false)
-=======
->>>>>>> parent of a222951... Я разобрался с этим говном
-=======
->>>>>>> parent of a222951... Я разобрался с этим говном
-                }
-            }
-        }
-    }
-
-    function EasyStart () {
-        if (snmv ==false){
-        timer = setInterval(function(){
-            snake.move();
-        },300);}
-    }
-    function MediumStart () {
-        if (snmv ==false){
-        timer = setInterval(function(){
-            snake.move();
-        },200);}
-    }
-    function HardStart () 
-    {
-        if (snmv ==false){
-        timer = setInterval(function(){
-            snake.move();
-        },100);}
-    }
-
-    function reload () 
-    {
-        window.location.reload();
-    }
 
         let snake = {
             length : 3,
@@ -388,16 +59,232 @@ function swipefc(){
 
         window.addEventListener('keydown', keyHandler, false);
         prepareGamePane(fieldSizeX, fieldSizeY);
-    })
+
+
+        function prepareGamePane (fieldSizeX, fieldSizeY){
+            let rt = 12;
+            for ( let x = 0; x < fieldSizeX; x++){
+                let coordinateX = document.createElement('div');
+                document.body.appendChild(coordinateX);
+                coordinateX.className = 'field';
+                coordinateX.style = "top: "+(rt+x*5)+"%";
+                for (let y = 0; y < fieldSizeY; y++){
+                    let coordinateY = document.createElement('div');
+                    coordinateX.appendChild(coordinateY);
+                    coordinateY.className = 'cell';
+                    coordinateY.id = x+','+y;
+                    coordinateY.style = "width: "+coordinateY.clientHeight;
+                }
+            }
+            setInterval(function(){
+                let ys = document.getElementsByClassName("cell");
+                for(let y=0; y<ys.length; y++){
+                    ys[y].style = "width: "+ys[y].clientHeight}
+            },50);
+            snake.initialisationSnake();
+            makeFood(fieldSizeX, fieldSizeY);
+        }
+
+        function makeFood (fieldSizeX, fieldSizeY){
+            let x = Math.round(Math.random() * (fieldSizeX-1));
+            let y = Math.round(Math.random() * (fieldSizeY-1));
+            let food = document.getElementById(x+','+y);
+            if (food.className == 'cell'){
+                food.className = "cell food";
+            } else { 
+                makeFood(fieldSizeX, fieldSizeY);
+            }
+            return food;
+        }
+
+
+        function keyHandler (event){
+            switch (event.keyCode) {
+                case KEY.left:
+                    if (direct != 0){
+                        directx = 2;
+                    }
+                    break;
+
+                case 65:
+                    if (direct != 0){
+                        directx = 2;
+                    }
+                    break;
+
+                case KEY.right:
+                    if (direct != 2){
+                        directx = 0;
+                    }
+                    break;
+                
+                case 68:
+                    if (direct != 2){
+                        directx = 0;
+                    }
+                    break;
+
+                case KEY.up:
+                    if (direct != 1){
+                        directx = 3;
+                    }
+                    break;
+
+                case 87:
+                    if (direct != 1){
+                        directx = 3;
+                    }
+                    break;
+
+                case KEY.down:
+                    if (direct != 3){
+                        directx = 1;
+                    }
+                    break;
+
+                case 83:
+                    if (direct != 3){
+                        directx = 1;
+                    }
+                    break;
+
+                default :
+                    return;
+            }
+        }
+    function swipefc(){
+        let     swipedir,
+                startX,
+                startY,
+                distX,
+                distY,
+                threshold = 80,
+                restraint = 100,
+                allowedTime = 5000,
+                elapsedTime,
+                startTime
+
+        window.addEventListener('touchstart', function(e){
+            let touchobj = e.changedTouches[0]
+            swipedir = 'none'
+            dist = 0
+            startX = touchobj.pageX
+            startY = touchobj.pageY
+            startTime = new Date().getTime() // record time when finger first makes contact with surface
+            e.preventDefault()
+        
+        }, false)
+
+        window.addEventListener('touchmove', function(e){
+            e.preventDefault() // prevent scrolling when inside DIV
+        }, false)
+
+        window.addEventListener('touchend', function(e){
+            let touchobj = e.changedTouches[0]
+            distX = touchobj.pageX - startX 
+            distY = touchobj.pageY - startY 
+            elapsedTime = new Date().getTime() - startTime 
+            if (elapsedTime <= allowedTime){ 
+                if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ 
+                    swipedir = (distX < 0)? 'left' : 'right'
+                }
+                else if (Math.abs(distY) >= threshold  && Math.abs(distX) <= restraint){ 
+                    swipedir = (distY < 0)? 'up' : 'down'
+                }
+            }
+            handleswipe(swipedir)
+            e.preventDefault()
+        }, false)
+    }
+        
+            function handleswipe(swipe){
+                switch (swipe){
+                    case 'left':
+                        if (direct != 0){
+                            directx = 2;
+                        }
+                        break;
+
+                    case 'right':
+                        if (direct != 2){
+                            directx = 0;
+                        }
+                        break;
+
+                    case 'up':
+                        if (direct != 1){
+                            directx = 3;
+                        }
+                        break;
+
+                    case 'down':
+                        if (direct != 3){
+                            directx = 1;
+                        }
+                        break;
+                }
+            }
+                
+
+        function compareEatOrGameOver (headCell, body) {
+            let tmp = document.getElementById(headCell.join());
+            if (tmp == null ) {
+            if (headCell[0] == -1)
+                headCell[0] = fieldSizeX - 1;
+            if (headCell[0] == fieldSizeX)
+                headCell[0] = 0;
+            if (headCell[1] == -1)
+                headCell[1] = fieldSizeY - 1;
+            if (headCell[1] == fieldSizeY)
+                headCell[1] = 0;
+            tmp = document.getElementById(headCell.join());
+            }
+
+            if ( tmp != null && tmp.className == 'cell' ){
+                let removeTail = body.shift();
+                body.push(headCell);
+                document.getElementById(removeTail.join()).className = 'cell';
+                document.getElementById(headCell.join()).className = 'cell snake';
+            } else { 
+                if ( tmp != null && tmp.className == 'cell food'){
+                    snake.length++;
+                    let scor = document.querySelector('.score');
+                    scor.innerHTML = 'Ваш счет: '+ (snake.length-3);
+                    body.push(headCell);
+                    document.getElementById(headCell.join()).className = 'cell snake';
+                    makeFood(fieldSizeX, fieldSizeY);
+                } else { 
+                    if (tmp.className == 'cell snake'){
+                        clearInterval(timer);
+                        alert('Вы проиграли! Ваш счет: ' + (snake.length-3) + '. Нажмите кнопку «Обновить» для начала новой игры!');
+                        document.getElementById("reload").addEventListener('touchstart',reload,false)
+                    }
+                }
+            }
+        }
+    }
+        if (num == 1) {
+            if (snmv ==false){
+            timer = setInterval(function(){
+                snake.move();
+            },300);}
+        }
+        if (num == 2) {
+            if (snmv ==false){
+            timer = setInterval(function(){
+                snake.move();
+            },200);}
+        }
+        if (num == 3) {
+            if (snmv ==false){
+            timer = setInterval(function(){
+                snake.move();
+            },100);}
+        }
+        if (num == 4) {
+            window.location.reload();
+        }
+    }
 </script>
-<link rel="stylesheet" href="style.css">
-<div id = "ALL" class="border"></div>
-<div class="buttons">
-    <button id="easy" onclick="EasyStart()">Простой</button>
-    <button id="medium" onclick="MediumStart()">Средний</button>
-    <button id="hard" onclick="HardStart()">Сложный</button>
-    <button id="reload" onclick="reload()">Обновить</button>
-</div>
-<div class = score>Ваш счет: 0</div>
 </body>
 </html>
