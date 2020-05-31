@@ -55,7 +55,21 @@
                 compareEatOrGameOver(headCell, body);
                 return headCell;
             }
+<<<<<<< HEAD
         };
+=======
+        },
+        move : function (){
+            direct = directx;
+            snmv = true;
+            let body = this.body
+            let head = this.body[this.length-1];
+            let headCell = head.map(function(value, index){ return value + direction[direct][index] });
+            compareEatOrGameOver(headCell, body);
+            return headCell;
+        }
+    };
+>>>>>>> parent of a222951... Я разобрался с этим говном
 
         window.addEventListener('keydown', keyHandler, false);
         prepareGamePane(fieldSizeX, fieldSizeY);
@@ -96,8 +110,66 @@
             }
             return food;
         }
+<<<<<<< HEAD
+=======
+    }
+
+    function dirx(id){
+        switch (id) {
+            case "left":
+                if (direct != 0){
+                    directx = 2;
+                }
+                break;
+
+            case "right":
+                if (direct != 2){
+                    directx = 0;
+                }
+                break;
+
+            case "up":
+                if (direct != 1){
+                    directx = 3;
+                }
+                break;
+
+            case "down":
+                if (direct != 3){
+                    directx = 1;
+                }
+                break;
+
+            default :
+                return;
+        }
+    }
+
+	let     swipedir,
+			startX,
+			startY,
+			distX,
+			distY,
+			threshold = 80,
+			restraint = 100,
+			allowedTime = 5000,
+			elapsedTime,
+			startTime
+
+	window.addEventListener('touchstart', function(e){
+		let touchobj = e.changedTouches[0]
+		swipedir = 'none'
+		dist = 0
+		startX = touchobj.pageX
+		startY = touchobj.pageY
+		startTime = new Date().getTime() // record time when finger first makes contact with surface
+		e.preventDefault()
+	
+	}, false)
+>>>>>>> parent of a222951... Я разобрался с этим говном
 
 
+<<<<<<< HEAD
         function keyHandler (event){
             switch (event.keyCode) {
                 case KEY.left:
@@ -107,6 +179,31 @@
                     break;
 
                 case 65:
+=======
+	window.addEventListener('touchend', function(e){
+		let touchobj = e.changedTouches[0]
+		distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+		distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+		elapsedTime = new Date().getTime() - startTime // get time elapsed
+		if (elapsedTime <= allowedTime){ // first condition for awipe met
+			if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+				swipedir = (distX < 0)? 'left' : 'right'
+			}
+			else if (Math.abs(distY) >= threshold  && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+				swipedir = (distY < 0)? 'up' : 'down'
+			}
+		}
+		// check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
+		handleswipe(swipedir)
+		e.preventDefault()
+	}, false)
+    
+    let hidetimer = null
+    
+        function handleswipe(swipe){
+            switch (swipe){
+                case 'left':
+>>>>>>> parent of a222951... Я разобрался с этим говном
                     if (direct != 0){
                         directx = 2;
                     }
@@ -246,6 +343,7 @@
                 document.getElementById(removeTail.join()).className = 'cell';
                 document.getElementById(headCell.join()).className = 'cell snake';
             } else { 
+<<<<<<< HEAD
                 if ( tmp != null && tmp.className == 'cell food'){
                     snake.length++;
                     let scor = document.querySelector('.score');
@@ -259,6 +357,11 @@
                         alert('Вы проиграли! Ваш счет: ' + (snake.length-3) + '. Нажмите кнопку «Обновить» для начала новой игры!');
                         document.getElementById("reload").addEventListener('touchstart',reload,false)
                     }
+=======
+                if (tmp.className == 'cell snake'){
+                    clearInterval(timer);
+                    alert('Вы проиграли! Ваш счет: ' + (snake.length-3) + '. Нажмите кнопку «Обновить» для начала новой игры!');
+>>>>>>> parent of a222951... Я разобрался с этим говном
                 }
             }
         }
