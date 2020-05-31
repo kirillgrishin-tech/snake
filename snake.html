@@ -32,14 +32,13 @@
         
         
             .buttons{
-                    margin: 5% 5% 60% 82%;
+                    margin: 5% 5% 40% 82%;
                     }
 
             .sansara
             {
                 color: rgb(248, 248, 248);
-                font-size: 60%;
-                
+                font-size: 80%; 
             }
 
             .score{
@@ -133,6 +132,10 @@
         brd[0].style.backgroundColor = "rgb(+"+Math.abs(255-hour*15)+","+(255-hour*10)+","+(255-hour*10)+")";
         let scor = document.querySelector('.score');
         scor.style.color = "rgb(+"+(hour*15)+","+(hour*10)+","+(hour*10)+")";
+        for (let i = 0; i<sanel.length; i++)
+            {
+                sanel[i].style.color = "rgb(+"+(hour*15)+","+(hour*10)+","+(hour*10)+")";
+            }
         let KEY = {
             'left' : 37,
             'up' : 38,
