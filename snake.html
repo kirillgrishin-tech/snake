@@ -1,86 +1,88 @@
 
   <html>
     <head>
-    <style>
-        html { overflow: hidden; }
-        body{
-            margin: 0;
-            padding: 0;
-            border: 0;
-            }
-    
-        .border{
-                z-index: -15;
-                position: absolute;
-                top: 0px;
-                background-color: rgb(185, 185, 175);
-                left: 0px;
-                width: calc(99%);            
-                height: calc(99%);
-                border: 2px solid #001100;
+        <title>Змейка</title>
+        <link rel="shortcut icon" href="https://www.google.com/s2/favicons?domain=slither.io" />
+        <style>
+            html { overflow: hidden; }
+            body{
+                margin: 0;
+                padding: 0;
+                border: 0;
                 }
-    
-        button {
-                border-radius: 10px;
-                padding: 6%;
-                margin: 3%;
-                background: linear-gradient(to top, #FFFAFA, #8B8682);
-                font-weight: 100%;
-                }
-    
-    
-        .buttons{
-                margin: 5% 5% 60% 82%;
-                }
-    
-        .contrls{
-                margin: 5% 5% 5% 5%;
-                }
-        .score{
-                position: absolute;
-                top: 5%;
-                left: 5%;
-                font-size: 100%;
-                color: rgb(12, 1, 14);
-                text-shadow: 0 0 6px rgb(56, 158, 141);
-            }
-        .field{
-                position: absolute;
-                z-index: 30;            
-                height: 5%;
-                width:80%;
-                left: 5%;
-            }
-        .cell{
-            margin: 0;
-            display: inline-block;
-            background-color: rgb(55, 57, 165);
-            height: 100%;
-            width: 23px;
-            border: 1px solid #010;
-            border-radius: 4px;
-            z-index: 30;
-            transition: background-color 0.3s;
-        }
         
-        .snake{
-            box-shadow: 0 0 10px #000000 inset;
-            background: linear-gradient(to right, rgb(17, 180, 221), rgb(11, 8, 184));
-            z-index: 30;
-            transition: background 0.2s;
-        }
-        .food{
-                background-color:#FF0000;
+            .border{
+                    z-index: -15;
+                    position: absolute;
+                    top: 0px;
+                    background-color: rgb(255, 255, 255);
+                    left: 0px;
+                    width: calc(99%);            
+                    height: calc(99%);
+                    border: 2px solid #001100;
+                    }
+        
+            button {
+                    border-radius: 10px;
+                    padding: 6%;
+                    margin: 3%;
+                    background: linear-gradient(to top, #FFFAFA, #8B8682);
+                    font-weight: 100%;
+                    }
+        
+        
+            .buttons{
+                    margin: 5% 5% 60% 82%;
+                    }
+        
+            .contrls{
+                    margin: 5% 5% 5% 5%;
+                    }
+            .score{
+                    position: absolute;
+                    top: 5%;
+                    left: 5%;
+                    font-size: 100%;
+                    color: rgb(12, 1, 14);
+                    text-shadow: 0 0 6px rgb(56, 158, 141);
+                }
+            .field{
+                    position: absolute;
+                    z-index: 30;            
+                    height: 5%;
+                    width:80%;
+                    left: 5%;
+                }
+            .cell{
+                margin: 0;
+                display: inline-block;
+                background-color: rgb(55, 57, 165);
+                height: 100%;
+                width: 23px;
+                border: 1px solid #010;
+                border-radius: 4px;
                 z-index: 30;
-                box-shadow: 0 0 10px #000000 inset;
-                transition: background-color 2s;
+                transition: background-color 0.3s;
             }
-    </style>
+            
+            .snake{
+                box-shadow: 0 0 10px #000000 inset;
+                background: linear-gradient(to right, rgb(17, 180, 221), rgb(11, 8, 184));
+                z-index: 30;
+                transition: background 0.2s;
+            }
+            .food{
+                    background-color:#FF0000;
+                    z-index: 30;
+                    box-shadow: 0 0 10px #000000 inset;
+                    transition: background-color 2s;
+                }
+        </style>
     </head>
+
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
-    /*
-       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      /* (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
     
@@ -104,11 +106,16 @@
         <div class = score>Ваш счет: 0</div>
     <script type="text/javascript">
         snmv = false;
-        let brd = document.getElementsByClassName("border");
+        let brd = document.getElementsByClassName("border"),
+            now = new Date()
+            hour = now.getHours()
         let timer;
         let directx = direct = 0;
         let fieldSizeX = Math.round(brd[0].clientHeight*0.8/(brd[0].clientHeight*0.05));
         let fieldSizeY = Math.round(brd[0].clientWidth*0.70/(brd[0].clientHeight*0.05));
+        brd[0].style.backgroundColor = "rgb(+"+(345-hour*15)+","+(255-hour*10)+","+(255-hour*10)+")";
+        let scor = document.querySelector('.score');
+        scor.style.color = "rgb(+"+(hour*15)+","+(hour*10)+","+(hour*10)+")";
         let KEY = {
             'left' : 37,
             'up' : 38,
