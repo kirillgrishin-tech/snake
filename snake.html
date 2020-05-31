@@ -77,9 +77,9 @@
             }
     </style>
     </head>
-
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
+    /*
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
@@ -88,7 +88,7 @@
             clickmap:true,
             trackLinks:true,
             accurateTrackBounce:true
-       });
+       });*/
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/61656814" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
@@ -99,11 +99,11 @@
             <button id="easy" onclick="EasyStart()">Простой</button>
             <button id="medium" onclick="MediumStart()">Средний</button>
             <button id="hard" onclick="HardStart()">Сложный</button>
-            <button onclick="reload()">Обновить</button>
+            <button id="reload" onclick="reload()">Обновить</button>
         </div>
         <div class = score>Ваш счет: 0</div>
     <script type="text/javascript">
-         snmv = false;
+        snmv = false;
         let brd = document.getElementsByClassName("border");
         let timer;
         let directx = direct = 0;
@@ -137,14 +137,13 @@
                 let body = this.body
                 let head = this.body[this.length-1];
                 let headCell = head.map(function(value, index){ return value + direction[direct][index] });
-                swipefc();
                 compareEatOrGameOver(headCell, body);
                 return headCell;
             }
         };
     
         window.addEventListener('keydown', keyHandler, false);
-        prepareGamePane(fieldSizeX, fieldSizeY);
+        setTimeout(prepareGamePane,500,fieldSizeX,fieldSizeY);
     
     
         function prepareGamePane (fieldSizeX, fieldSizeY){
@@ -351,22 +350,25 @@
     
         function EasyStart () {
             if (snmv ==false){
-            timer = setInterval(function(){
-                snake.move();
-            },300);}
+                timer = setInterval(function(){
+                    snake.move();
+                },300);}
+            swipefc();
         }
         function MediumStart () {
             if (snmv ==false){
-            timer = setInterval(function(){
-                snake.move();
-            },200);}
+                timer = setInterval(function(){
+                    snake.move();
+                },200);}
+            swipefc();
         }
         function HardStart () 
         {
             if (snmv ==false){
-            timer = setInterval(function(){
-                snake.move();
-            },100);}
+                timer = setInterval(function(){
+                    snake.move();
+                },100);}
+            swipefc();
         }
     
         function reload () 
