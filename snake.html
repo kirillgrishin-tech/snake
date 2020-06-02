@@ -290,13 +290,12 @@
             dist = 0
             startX = touchobj.pageX
             startY = touchobj.pageY
-            startTime = new Date().getTime() // record time when finger first makes contact with surface
+            startTime = new Date().getTime()
             e.preventDefault()
-        
         }, false)
     
         window.addEventListener('touchmove', function(e){
-            e.preventDefault() // prevent scrolling when inside DIV
+            e.preventDefault()
         }, false)
     
         window.addEventListener('touchend', function(e){
